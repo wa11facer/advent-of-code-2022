@@ -1,12 +1,9 @@
 <?php
 /**
  * https://adventofcode.com/2022/day/2
- *
- * A for Rock, B for Paper, and C for Scissors
- * X for Rock, Y for Paper, and Z for Scissors
  */
 class RockPaperScissors {
-  protected mixed $input;
+  protected array|bool $input;
 
   const ELF_ROCK        = 'A';
   const ELF_PAPER       = 'B';
@@ -67,16 +64,12 @@ class RockPaperScissors {
   }
 
   private function getShapeToPlay(string $elf_shape, string $outcome): string {
-    switch($outcome) {
-      case self::LOSS:
-        return self::OUTCOME_PLAYER_LOSS[$elf_shape];
-      case self::WIN:
-        return self::OUTCOME_PLAYER_WIN[$elf_shape];
-      case self::DRAW:
-        return self::OUTCOME_PLAYER_DRAW[$elf_shape];
-      default:
-        return '';
-    }
+    return match ($outcome) {
+      self::LOSS => self::OUTCOME_PLAYER_LOSS[$elf_shape],
+      self::WIN => self::OUTCOME_PLAYER_WIN[$elf_shape],
+      self::DRAW => self::OUTCOME_PLAYER_DRAW[$elf_shape],
+      default => '',
+    };
   }
 
   public function calculateScore(bool $secondPart=false): int {
