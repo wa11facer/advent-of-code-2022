@@ -23,6 +23,7 @@ class CampCleanup {
 
   private function getNumberOfIncludedPairs(): int {
     $count = 0;
+
     foreach ($this->input as $pair) {
       if ($this->isFirstIncludedInSecond($pair) || $this->isSecondIncludedInFirst($pair)) {
         $count++;
@@ -32,14 +33,29 @@ class CampCleanup {
     return $count;
   }
 
-  private function getNumberOfOverlappingPairs() {
+  private function isOverlap(array $sections): bool {
+    return ($sections[1] >= $sections[2] && $sections[0] <= $sections[2])
+      || ($sections[3] >= $sections[0] && $sections[2] <= $sections[0]);
+  }
+
+  private function getNumberOfOverlappingPairs(): int {
+    $count = 0;
+
+    foreach ($this->input as $pair) {
+      if ($this->isOverlap($pair)) {
+        $count++;
+      }
+    }
+
+    return $count;
   }
 
   public function solve(): void {
     #part 1
-    echo $this->getNumberOfIncludedPairs();
+    echo $this->getNumberOfIncludedPairs() . PHP_EOL;
 
-    $this->getNumberOfOverlappingPairs();
+    #part 2
+    echo $this->getNumberOfOverlappingPairs() . PHP_EOL;
   }
 }
 
