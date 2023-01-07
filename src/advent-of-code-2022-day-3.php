@@ -5,7 +5,7 @@ class RucksackReorg {
   private array|false $input;
 
   public function __construct() {
-    $this->input = file("input/day-3-input.txt", FILE_IGNORE_NEW_LINES);
+    $this->input = file("../input/day-3-input.txt", FILE_IGNORE_NEW_LINES);
 
     if (!$this->input) {
       exit('could not open input file for reading');
