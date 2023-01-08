@@ -3,7 +3,8 @@
 class SupplyStacks {
 
   private array|false $input;
-  private array $supplyStack = [];
+  private array $supplyStacks = [];
+  private array $rearrangements = [];
 
   public function __construct() {
     $this->input = file("../input/day-5-input.txt", FILE_IGNORE_NEW_LINES);
@@ -25,7 +26,7 @@ class SupplyStacks {
       $aux = 0;
       for ($i = 1; $i < count($line); $i += 4) {
         if ($line[$i] != ' ') {
-          $this->supplyStack[$i - 3 * $aux][] = $line[$i];
+          $this->supplyStacks[$i - 3 * $aux][] = $line[$i];
         }
         $aux++;
       }
@@ -34,32 +35,58 @@ class SupplyStacks {
     }
   }
 
-  private function performMoves(): string {
-    $orders = [];
+  private function getRearrangements(): void {
 
     foreach($this->input as $key => $line) {
-      $orders[$key] = preg_split('/[a-z ]+/', $line);
-      array_shift($orders[$key]);
+      $this->rearrangements[$key] = preg_split('/[a-z ]+/', $line);
+      array_shift($this->rearrangements[$key]);
     }
+  }
 
-    foreach ($orders as $order) {
-      for ($i = 0; $i < $order[0]; $i++) {
-        array_unshift($this->supplyStack[$order[2]], array_shift($this->supplyStack[$order[1]]));
+  private function performMoves1By1(array $supplyStacks): array {
+    foreach ($this->rearrangements as $rearrangement) {
+      for ($i = 0; $i < $rearrangement[0]; $i++) {
+        array_unshift($supplyStacks[$rearrangement[2]], array_shift($supplyStacks[$rearrangement[1]]));
       }
     }
 
+    return $supplyStacks;
+  }
+
+  private function performMovesAllAtOnce(array $supplyStacks): array {
+    foreach ($this->rearrangements as $rearrangement) {
+      for ($i = 0; $i < $rearrangement[0]; $i++) {
+        $stacklessCrates[] = array_shift($supplyStacks[$rearrangement[1]]);
+      }
+      for ($i = 0; $i < $rearrangement[0]; $i++) {
+        array_unshift($supplyStacks[$rearrangement[2]], array_pop($stacklessCrates));
+      }
+    }
+
+    return $supplyStacks;
+  }
+
+  public function getAnswer(array $supplyStacks): string {
     $answer = '';
-    for ($i = 1; $i <= count($this->supplyStack); $i++) {
-      $answer .= array_shift($this->supplyStack[$i]);
+    for ($i = 1; $i <= count($supplyStacks); $i++) {
+      $answer .= array_shift($supplyStacks[$i]);
     }
 
     return $answer;
   }
 
   public function solve(): void {
-    # part 1
     $this->getCurrentStacks();
-    echo $this->performMoves();
+    $this->getRearrangements();
+
+    # part 1
+    $modifiedSupplyStacks  = $this->performMoves1By1($this->supplyStacks);
+    echo 'After moving them 1-by-1, the following crates are on top of the stacks: ' . $this->getAnswer($modifiedSupplyStacks) . PHP_EOL;
+
+    # part 2
+    $modifiedSupplyStacks  = $this->performMovesAllAtOnce($this->supplyStacks);
+    echo 'After moving them all at once, the following crates are on top of the stacks: ' . $this->getAnswer($modifiedSupplyStacks);
+
   }
 
 }
