@@ -39,7 +39,7 @@ class RockPaperScissors {
   const LOSS_POINTS = 0;
 
   public function __construct() {
-    $this->input = file("../input/day-2-input.txt", FILE_IGNORE_NEW_LINES);
+    $this->input = file("../input/../day-2-input.txt", FILE_IGNORE_NEW_LINES);
     $this->input = array_map(function ($value) {
       return explode(" ", $value);
     }, $this->input);

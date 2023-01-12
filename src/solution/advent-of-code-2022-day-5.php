@@ -1,16 +1,27 @@
 <?php
 
-class SupplyStacks {
+use Advent22\Interface\Advent22Solution;
+
+require_once '../interface/Advent22Solution.php';
+
+
+class SupplyStacks implements Advent22Solution {
   private array|false $input;
   private array $supplyStacks = [];
   private array $rearrangements = [];
 
   public function __construct() {
-    $this->input = file("../input/day-5-input.txt", FILE_IGNORE_NEW_LINES);
+    $this->input = $this->getInput();
+  }
 
-    if ( !$this->input) {
+  public function getInput(): array {
+    $input = file("../../input/day-5-input.txt", FILE_IGNORE_NEW_LINES);
+
+    if ( !$input) {
       exit('could not open input file for reading');
     }
+
+    return $input;
   }
 
   private function getCurrentStacks(): void {

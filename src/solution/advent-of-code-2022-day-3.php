@@ -1,15 +1,25 @@
 <?php
 
-class RucksackReorg {
+use Advent22\Interface\Advent22Solution;
+
+require_once '../interface/Advent22Solution.php';
+
+class RucksackReorg implements Advent22Solution {
 
   private array|false $input;
 
   public function __construct() {
-    $this->input = file("../input/day-3-input.txt", FILE_IGNORE_NEW_LINES);
+    $this->input = $this->getInput();
+  }
 
-    if (!$this->input) {
+  public function getInput(): array {
+    $input = file("../../input/day-3-input.txt", FILE_IGNORE_NEW_LINES);
+
+    if (!$input) {
       exit('could not open input file for reading');
     }
+
+    return $input;
   }
 
   private function getDuplicateType(string $firstCompartment, string $secondCompartment): string {
@@ -64,16 +74,12 @@ class RucksackReorg {
     return $totalPriority;
   }
 
-  public function getTotalPriority(bool $secondPart=false): int {
-    if ($secondPart) {
-      return $this->getTotalPriorityBadges();
-    } else {
-      return $this->getTotalPriorityDuplicates();
-    }
+  public function solve(): void {
+    echo "Total Priority of duplicate items from all rucksacks is " . $this->getTotalPriorityBadges() . PHP_EOL;
+
+    echo "Total Priority of badges from all groups is " . $this->getTotalPriorityDuplicates() . PHP_EOL;
   }
 }
 
 $instance = new RucksackReorg();
-
-echo "Total Priority of duplicate items from all rucksacks is " . $instance->getTotalPriority() . PHP_EOL;
-echo "Total Priority of badges from all groups is " . $instance->getTotalPriority(true) . PHP_EOL;
+$instance->solve();

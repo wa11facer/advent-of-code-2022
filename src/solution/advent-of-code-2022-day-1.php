@@ -6,7 +6,7 @@
 class CalorieCounting {
   protected mixed $input;
   public function readInput(): void {
-    $this->input = fopen("../input/day-1-input.txt", "r");
+    $this->input = fopen("../../input/day-1-input.txt", "r");
     if (!$this->input) {
       exit('could not open input file for reading');
     }
