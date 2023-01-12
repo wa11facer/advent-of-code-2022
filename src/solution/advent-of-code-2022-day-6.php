@@ -4,7 +4,7 @@ namespace Advent22\Solution;
 
 use Advent22\Interface\Advent22Solution;
 
-require_once 'interface/Advent22Solution.php';
+require_once '../interface/Advent22Solution.php';
 
 class TuningTrouble implements Advent22Solution {
   private array|false $input;
@@ -14,7 +14,7 @@ class TuningTrouble implements Advent22Solution {
   }
 
   public function getInput(): array {
-    $input = file("../input/day-6-input.txt", FILE_IGNORE_NEW_LINES);
+    $input = file("../../input/day-6-input.txt", FILE_IGNORE_NEW_LINES);
 
     if ( !$input) {
       exit('could not open input file for reading');
