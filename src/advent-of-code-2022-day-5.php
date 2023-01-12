@@ -1,7 +1,6 @@
 <?php
 
 class SupplyStacks {
-
   private array|false $input;
   private array $supplyStacks = [];
   private array $rearrangements = [];
@@ -36,8 +35,7 @@ class SupplyStacks {
   }
 
   private function getRearrangements(): void {
-
-    foreach($this->input as $key => $line) {
+    foreach ($this->input as $key => $line) {
       $this->rearrangements[$key] = preg_split('/[a-z ]+/', $line);
       array_shift($this->rearrangements[$key]);
     }
@@ -80,15 +78,15 @@ class SupplyStacks {
     $this->getRearrangements();
 
     # part 1
-    $modifiedSupplyStacks  = $this->performMoves1By1($this->supplyStacks);
-    echo 'After moving them 1-by-1, the following crates are on top of the stacks: ' . $this->getAnswer($modifiedSupplyStacks) . PHP_EOL;
+    $modifiedSupplyStacks = $this->performMoves1By1($this->supplyStacks);
+    echo 'After moving them 1-by-1, the following crates are on top of the stacks: '
+      . $this->getAnswer($modifiedSupplyStacks) . PHP_EOL;
 
     # part 2
-    $modifiedSupplyStacks  = $this->performMovesAllAtOnce($this->supplyStacks);
-    echo 'After moving them all at once, the following crates are on top of the stacks: ' . $this->getAnswer($modifiedSupplyStacks);
-
+    $modifiedSupplyStacks = $this->performMovesAllAtOnce($this->supplyStacks);
+    echo 'After moving them all at once, the following crates are on top of the stacks: '
+      . $this->getAnswer($modifiedSupplyStacks);
   }
-
 }
 
 $instance = new SupplyStacks();
