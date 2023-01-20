@@ -1,0 +1,3 @@
+[submodule "aoc22-input"]
+	path = aoc22-input
+	url = git@github.com:wa11facer/aoc22-input.git

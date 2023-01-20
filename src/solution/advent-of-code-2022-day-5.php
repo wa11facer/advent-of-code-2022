@@ -15,10 +15,10 @@ class SupplyStacks implements Advent22Solution {
   }
 
   public function getInput(): array {
-    $input = file("../../input/day-5-input.txt", FILE_IGNORE_NEW_LINES);
+    $input = file("../../aoc22-input/day-5-input.txt", FILE_IGNORE_NEW_LINES);
 
     if ( !$input) {
-      exit('could not open input file for reading');
+      exit('could not open aoc22-input file for reading');
     }
 
     return $input;

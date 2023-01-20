@@ -39,13 +39,13 @@ class RockPaperScissors {
   const LOSS_POINTS = 0;
 
   public function __construct() {
-    $this->input = file("../input/../day-2-input.txt", FILE_IGNORE_NEW_LINES);
+    $this->input = file("../aoc22-input/../day-2-input.txt", FILE_IGNORE_NEW_LINES);
     $this->input = array_map(function ($value) {
       return explode(" ", $value);
     }, $this->input);
 
     if ( !$this->input) {
-      exit('could not open input file for reading');
+      exit('could not open aoc22-input file for reading');
     }
   }
 
