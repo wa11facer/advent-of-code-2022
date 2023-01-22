@@ -1,10 +1,14 @@
 <?php
 
-/**
- * https://adventofcode.com/2022/day/2
- */
-class RockPaperScissors {
+namespace Advent22\Solution;
+
+use Advent22\Interface\Advent22Solution;
+
+require_once __DIR__ . '/../interface/Advent22Solution.php';
+
+class RockPaperScissors implements Advent22Solution {
   protected array|bool $input;
+
   const ELF_ROCK = 'A';
   const ELF_PAPER = 'B';
   const ELF_SCISSORS = 'C';
@@ -39,15 +43,24 @@ class RockPaperScissors {
   const LOSS_POINTS = 0;
 
   public function __construct() {
-    $this->input = file("../aoc22-input/../day-2-input.txt", FILE_IGNORE_NEW_LINES);
-    $this->input = array_map(function ($value) {
-      return explode(" ", $value);
-    }, $this->input);
+    $this->input = $this->getInput();
+  }
 
-    if ( !$this->input) {
+
+  public function getInput(): array {
+    $input = file(__DIR__ . "/../../aoc22-input/day-2-input.txt", FILE_IGNORE_NEW_LINES);
+
+    $input = array_map(function ($value) {
+      return explode(" ", $value);
+    }, $input);
+
+    if ( !$input) {
       exit('could not open aoc22-input file for reading');
     }
+
+    return $input;
   }
+
 
   private function getOutcomePoints(string $elf, string $player): int {
     if (self::OUTCOME_PLAYER_WIN[$elf] == $player) {
@@ -59,6 +72,7 @@ class RockPaperScissors {
     return self::DRAW_POINTS;
   }
 
+
   private function getShapeToPlay(string $elf_shape, string $outcome): string {
     return match ($outcome) {
       self::LOSS => self::OUTCOME_PLAYER_LOSS[$elf_shape],
@@ -68,7 +82,8 @@ class RockPaperScissors {
     };
   }
 
-  public function calculateScore(bool $secondPart = false): int {
+
+  private function calculateScore(bool $secondPart = false): int {
     $totalScore = 0;
 
     foreach ($this->input as $line) {
@@ -81,8 +96,11 @@ class RockPaperScissors {
 
     return $totalScore;
   }
-}
 
-$instance = new RockPaperScissors();
-echo "Total Score: " . $instance->calculateScore() . PHP_EOL;
-echo "Total Score 2nd part: " . $instance->calculateScore(true) . PHP_EOL;
+
+  public function solve(): void {
+    echo "Total Score: " . $this->calculateScore() . PHP_EOL;
+
+    echo "Total Score 2nd part: " . $this->calculateScore(true) . PHP_EOL;
+  }
+}

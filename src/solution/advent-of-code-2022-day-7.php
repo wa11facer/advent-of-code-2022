@@ -1,8 +1,10 @@
 <?php
 
+namespace Advent22\Solution;
+
 use Advent22\Interface\Advent22Solution;
 
-require_once '../interface/Advent22Solution.php';
+require_once __DIR__ . '/../interface/Advent22Solution.php';
 
 class NoSpaceLeft implements Advent22Solution {
 
@@ -19,7 +21,7 @@ class NoSpaceLeft implements Advent22Solution {
 
 
   public function getInput(): array {
-    $input = file("../../aoc22-input/day-7-input.txt", FILE_IGNORE_NEW_LINES);
+    $input = file(__DIR__ . "/../../aoc22-input/day-7-input.txt", FILE_IGNORE_NEW_LINES);
 
     if (!$input) {
       exit('could not open aoc22-input file for reading');
@@ -153,6 +155,3 @@ class NoSpaceLeft implements Advent22Solution {
       . $this->getSizeofSmallestDirToDelete($amountOfDiskSpaceToFree) . PHP_EOL;
   }
 }
-
-$instance = new NoSpaceLeft();
-$instance->solve();

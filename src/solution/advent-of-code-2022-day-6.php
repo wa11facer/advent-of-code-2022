@@ -4,7 +4,7 @@ namespace Advent22\Solution;
 
 use Advent22\Interface\Advent22Solution;
 
-require_once '../interface/Advent22Solution.php';
+require_once __DIR__ . '/../interface/Advent22Solution.php';
 
 class TuningTrouble implements Advent22Solution {
   private array|false $input;
@@ -14,7 +14,7 @@ class TuningTrouble implements Advent22Solution {
   }
 
   public function getInput(): array {
-    $input = file("../../aoc22-input/day-6-input.txt", FILE_IGNORE_NEW_LINES);
+    $input = file(__DIR__ . "/../../aoc22-input/day-6-input.txt", FILE_IGNORE_NEW_LINES);
 
     if ( !$input) {
       exit('could not open aoc22-input file for reading');
@@ -49,9 +49,6 @@ class TuningTrouble implements Advent22Solution {
     echo 'The first start-of-packet marker is complete after ' . $this->findStartMarker(4) . ' characters' . PHP_EOL;
 
     # part 2
-    echo 'The first start-of-message marker is complete after ' . $this->findStartMarker(14) . ' characters';
+    echo 'The first start-of-message marker is complete after ' . $this->findStartMarker(14) . ' characters' . PHP_EOL;
   }
 }
-
-$instance = new TuningTrouble();
-$instance->solve();

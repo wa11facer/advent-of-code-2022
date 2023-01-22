@@ -1,8 +1,10 @@
 <?php
 
+namespace Advent22\Solution;
+
 use Advent22\Interface\Advent22Solution;
 
-require_once '../interface/Advent22Solution.php';
+require_once __DIR__ . '/../interface/Advent22Solution.php';
 
 
 class SupplyStacks implements Advent22Solution {
@@ -15,7 +17,7 @@ class SupplyStacks implements Advent22Solution {
   }
 
   public function getInput(): array {
-    $input = file("../../aoc22-input/day-5-input.txt", FILE_IGNORE_NEW_LINES);
+    $input = file(__DIR__ . "/../../aoc22-input/day-5-input.txt", FILE_IGNORE_NEW_LINES);
 
     if ( !$input) {
       exit('could not open aoc22-input file for reading');
@@ -96,9 +98,6 @@ class SupplyStacks implements Advent22Solution {
     # part 2
     $modifiedSupplyStacks = $this->performMovesAllAtOnce($this->supplyStacks);
     echo 'After moving them all at once, the following crates are on top of the stacks: '
-      . $this->getAnswer($modifiedSupplyStacks);
+      . $this->getAnswer($modifiedSupplyStacks) . PHP_EOL;
   }
 }
-
-$instance = new SupplyStacks();
-$instance->solve();

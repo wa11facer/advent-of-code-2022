@@ -1,8 +1,10 @@
 <?php
 
+namespace Advent22\Solution;
+
 use Advent22\Interface\Advent22Solution;
 
-require_once '../interface/Advent22Solution.php';
+require_once __DIR__ . '/../interface/Advent22Solution.php';
 
 class CampCleanup implements Advent22Solution {
 
@@ -13,7 +15,7 @@ class CampCleanup implements Advent22Solution {
   }
 
   public function getInput(): array {
-    $input = file("../../aoc22-input/day-4-input.txt", FILE_IGNORE_NEW_LINES);
+    $input = file(__DIR__ . "/../../aoc22-input/day-4-input.txt", FILE_IGNORE_NEW_LINES);
 
     if (!$input) {
       exit('could not open aoc22-input file for reading');
@@ -61,12 +63,9 @@ class CampCleanup implements Advent22Solution {
 
   public function solve(): void {
     #part 1
-    echo $this->getNumberOfIncludedPairs() . PHP_EOL;
+    echo '# of assignment pairs in which one range fully contain the other: ' . $this->getNumberOfIncludedPairs() . PHP_EOL;
 
     #part 2
-    echo $this->getNumberOfOverlappingPairs() . PHP_EOL;
+    echo '# of assignment pairs in which the ranges overlap: ' . $this->getNumberOfOverlappingPairs() . PHP_EOL;
   }
 }
-
-$instance = new CampCleanup();
-$instance->solve();

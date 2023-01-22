@@ -1,19 +1,26 @@
 <?php
 
-/**
- * https://adventofcode.com/2022/day/1
- */
-class CalorieCounting {
-  protected mixed $input;
-  public function readInput(): void {
-    $this->input = fopen("../../aoc22-input/day-1-input.txt", "r");
-    if (!$this->input) {
+namespace Advent22\Solution;
+
+use Advent22\Interface\Advent22Solution;
+
+require_once __DIR__ . '/../interface/Advent22Solution.php';
+
+class CalorieCounting implements Advent22Solution {
+  protected mixed $input = [];
+
+  public function getInput(): mixed {
+    $input = fopen(__DIR__ . "/../../aoc22-input/day-1-input.txt", "r");
+
+    if (!$input) {
       exit('could not open aoc22-input file for reading');
     }
+
+    return $input;
   }
 
-  public function findTopCount(int $howMany): int {
-    $this->readInput();
+
+  private function findTopCount(int $howMany): int {
     $currentCalorieCount = 0;
     $topCalorieCount = [0];
 
@@ -38,8 +45,14 @@ class CalorieCounting {
 
     return array_sum($topCalorieCount);
   }
+
+
+  public function solve(): void {
+    $this->input = $this->getInput();
+    echo "The most calories carried by an Elf are " . $this->findTopCount(1) . PHP_EOL;
+
+    $this->input = $this->getInput();
+    echo "The total calories carried by the 3 Elves with the most calories is " . $this->findTopCount(3) . PHP_EOL;
+  }
 }
 
-$instance = new CalorieCounting();
-echo "The most calories carried by an Elf are " . $instance->findTopCount(1) . PHP_EOL;
-echo "The total calories carried by the 3 Elves with the most calories is " . $instance->findTopCount(3);
