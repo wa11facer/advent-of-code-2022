@@ -1,28 +1,23 @@
 <?php
 
-namespace Advent22;
+namespace Wallfacer\AdventOfCode2022;
 
-foreach (scandir(__DIR__ . '/solution') as $filename) {
-  $path = __DIR__ . '/solution/' . $filename;
-  if (is_file($path)) {
-    require $path;
-  }
-}
+require 'vendor/autoload.php';
 
 const DAYS_CLASSES_MAP = [
-  '1' => 'CalorieCounting',
-  '2' => 'RockPaperScissors',
-  '3' => 'RucksackReorg',
-  '4' => 'CampCleanup',
-  '5' => 'SupplyStacks',
-  '6' => 'TuningTrouble',
-  '7' => 'NoSpaceLeft',
-  '8' => 'TreetopTreeHouse',
+  '1' => 'Day1CalorieCounting',
+  '2' => 'Day2RockPaperScissors',
+  '3' => 'Day3RucksackReorg',
+  '4' => 'Day4CampCleanup',
+  '5' => 'Day5SupplyStacks',
+  '6' => 'Day6TuningTrouble',
+  '7' => 'Day7NoSpaceLeft',
+  '8' => 'Day8TreetopTreeHouse',
 ];
 
 if ($argc != 2) {
   echo 'Usage: php RunSolutionForDay.php \<day_number\>';
 } elseif (is_numeric($argv[1]) && isset(DAYS_CLASSES_MAP[$argv[1]])) {
-  $instance = new ('Advent22\Solution\\' . DAYS_CLASSES_MAP[$argv[1]])();
+  $instance = new (__NAMESPACE__ . '\Solution\\' . DAYS_CLASSES_MAP[$argv[1]])();
   $instance->solve();
 }

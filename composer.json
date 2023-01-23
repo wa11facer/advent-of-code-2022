@@ -1,0 +1,16 @@
+{
+    "name": "wallfacer/advent-of-code-2022",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Wallfacer\\AdventOfCode2022\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Gabriel Buta (wa11facer)",
+            "email": "gabibuta@live.com"
+        }
+    ],
+    "require": {}
+}

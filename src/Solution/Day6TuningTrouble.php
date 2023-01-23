@@ -1,12 +1,12 @@
 <?php
 
-namespace Advent22\Solution;
+namespace Wallfacer\AdventOfCode2022\Solution;
 
-use Advent22\Interface\Advent22Solution;
+use Wallfacer\AdventOfCode2022\Interface\Advent22Solution;
 
-require_once __DIR__ . '/../interface/Advent22Solution.php';
+require_once __DIR__ . '/../Interface/Advent22Solution.php';
 
-class TuningTrouble implements Advent22Solution {
+class Day6TuningTrouble implements Advent22Solution {
   private array|false $input;
 
   public function __construct() {

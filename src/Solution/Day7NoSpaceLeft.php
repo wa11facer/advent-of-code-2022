@@ -1,12 +1,12 @@
 <?php
 
-namespace Advent22\Solution;
+namespace Wallfacer\AdventOfCode2022\Solution;
 
-use Advent22\Interface\Advent22Solution;
+use Wallfacer\AdventOfCode2022\Interface\Advent22Solution;
 
-require_once __DIR__ . '/../interface/Advent22Solution.php';
+require_once __DIR__ . '/../Interface/Advent22Solution.php';
 
-class NoSpaceLeft implements Advent22Solution {
+class Day7NoSpaceLeft implements Advent22Solution {
 
   const MAX_FOLDER_SIZE = 100000;
   const TOTAL_DISK_SPACE = 70000000;

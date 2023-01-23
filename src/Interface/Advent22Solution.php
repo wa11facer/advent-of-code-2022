@@ -1,6 +1,6 @@
 <?php
 
-namespace Advent22\Interface;
+namespace Wallfacer\AdventOfCode2022\Interface;
 
 interface Advent22Solution {
   public function getInput(): mixed;
