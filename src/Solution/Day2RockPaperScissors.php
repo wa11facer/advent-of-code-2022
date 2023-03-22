@@ -8,6 +8,7 @@ require_once __DIR__ . '/../Interface/Advent22Solution.php';
 
 class Day2RockPaperScissors implements Advent22Solution {
   protected array|bool $input;
+  protected bool $useTestInput;
 
   const ELF_ROCK = 'A';
   const ELF_PAPER = 'B';
@@ -42,13 +43,14 @@ class Day2RockPaperScissors implements Advent22Solution {
   const DRAW_POINTS = 3;
   const LOSS_POINTS = 0;
 
-  public function __construct() {
+  public function __construct(bool $useTestInput) {
+    $this->useTestInput = $useTestInput;
     $this->input = $this->getInput();
   }
 
 
   public function getInput(): array {
-    $input = file(__DIR__ . "/../../aoc22-input/day-2-input.txt", FILE_IGNORE_NEW_LINES);
+    $input = file(__DIR__ . "/../../aoc22-input/day-2-" . ($this->useTestInput ? 'test-' : '') . "input.txt", FILE_IGNORE_NEW_LINES);
 
     $input = array_map(function ($value) {
       return explode(" ", $value);

@@ -8,9 +8,14 @@ require_once __DIR__ . '/../Interface/Advent22Solution.php';
 
 class Day1CalorieCounting implements Advent22Solution {
   protected mixed $input = [];
+  protected bool $useTestInput;
+
+  public function __construct(bool $useTestInput) {
+    $this->useTestInput = $useTestInput;
+  }
 
   public function getInput(): mixed {
-    $input = fopen(__DIR__ . "/../../aoc22-input/day-1-input.txt", "r");
+    $input = fopen(__DIR__ . "/../../aoc22-input/day-1-" . ($this->useTestInput ? 'test-' : '') . "input.txt", "r");
 
     if (!$input) {
       exit('could not open aoc22-input file for reading');
