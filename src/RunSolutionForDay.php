@@ -22,25 +22,25 @@ if (!in_array($argc, [2, 3])) {
 }
 
 $dayNumber = 0;
-$useTestInput = FALSE;
+$useTestInput = false;
 
-foreach ($argv as $scriptParam) {
+foreach ($argv as $key => $scriptParam) {
   if (str_starts_with($scriptParam, '-d')) {
     $dayNumber = substr($scriptParam, 2);
     if (!is_numeric($dayNumber) || !isset(DAYS_CLASSES_MAP[$dayNumber])) {
-      echo 'Invalid day';
+      echo 'Invalid day number provided. Please provide a valid day number between 1 and 25.';
       exit;
     }
     continue;
   }
 
   if (in_array($scriptParam, ['--test', '-t'])) {
-    $useTestInput = TRUE;
+    $useTestInput = true;
     continue;
   }
 
   # ignore empty params (from PHPStorm) & argv[0]
-  if (empty($scriptParam) || $scriptParam == __FILE__) {
+  if (empty($scriptParam) || $key === 0) {
     continue;
   }
 
@@ -48,5 +48,13 @@ foreach ($argv as $scriptParam) {
   exit;
 }
 
-$instance = new (__NAMESPACE__ . '\Solution\\' . DAYS_CLASSES_MAP[$dayNumber])($useTestInput);
+$className = __NAMESPACE__ . '\\Solution\\' . DAYS_CLASSES_MAP[$dayNumber];
+$reflectionClass = new \ReflectionClass($className);
+$instance = $reflectionClass->newInstance($useTestInput);
+
+$start = microtime(true);
+
 $instance->solve();
+
+$end = microtime(true);
+echo 'Duration: ' . round($end - $start, 4) . ' seconds' . PHP_EOL;
